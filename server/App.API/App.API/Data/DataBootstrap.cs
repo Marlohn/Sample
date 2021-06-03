@@ -1,9 +1,8 @@
-﻿using System;
+﻿using App.API.Models;
+using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
-using App.API.Models;
-using Microsoft.EntityFrameworkCore;
 
 namespace App.API.Data
 {
@@ -389,6 +388,6 @@ namespace App.API.Data
             "Chapman",
             "Ramirez",
             "Mayer"
-        }; 
+        };
     }
 }

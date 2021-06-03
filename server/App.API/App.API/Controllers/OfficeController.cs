@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using App.API.Data;
-using App.API.Models;
+﻿using App.API.Models;
 using App.API.Services;
-using Dapper;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace App.API.Controllers
 {
@@ -27,13 +23,15 @@ namespace App.API.Controllers
         {
             try
             {
+                //CAN IMPLEMENT CACHE HERE
                 return Ok(await officeService.GetOfficesByAdress(searchPattern));
             }
             catch (Exception)
             {
+                //CAN IMPLEMENT LOG HERE
                 return StatusCode(500, "Error example");
-            }            
-        }  
-            
+            }
+        }
+
     }
 }

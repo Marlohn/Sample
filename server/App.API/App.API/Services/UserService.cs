@@ -1,10 +1,10 @@
-﻿using System;
+﻿using App.API.Data;
+using App.API.Models;
+using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using App.API.Data;
-using App.API.Models;
-using Microsoft.EntityFrameworkCore;
 
 namespace App.API.Services
 {

@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using App.API.Models;
+﻿using App.API.Models;
 using App.API.Services;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace App.API.Controllers
 {
@@ -24,12 +22,14 @@ namespace App.API.Controllers
         {
             try
             {
+                //CAN IMPLEMENT CACHE HERE
                 return Ok(await userService.GetUsersByOffices(officeIds));
             }
             catch
             {
+                //CAN IMPLEMENT LOG HERE
                 return StatusCode(500, "Error example");
-            }            
+            }
         }
     }
 }

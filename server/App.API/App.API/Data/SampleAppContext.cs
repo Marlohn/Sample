@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
-using App.API.Models;
+﻿using App.API.Models;
 using Dapper;
 using Microsoft.EntityFrameworkCore;
+using System;
+using System.Data;
 
 namespace App.API.Data
 {

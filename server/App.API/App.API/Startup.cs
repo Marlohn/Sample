@@ -25,7 +25,7 @@ namespace App.API
             SqlMapper.AddTypeHandler(new SqlGuidTypeHandler());
             services.AddDbContext<SampleAppContext>();
             services.AddTransient<UserService>();
-            
+
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
