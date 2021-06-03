@@ -22,9 +22,17 @@ namespace App.API.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<Office> Get(string searchPattern)
-            // to avoid additional allocations
-            => context.Query<Office>($@"select * from Offices where lower(Address) like lower('%{searchPattern}%')");       
+        public ActionResult<IEnumerable<Office>> Get(string searchPattern)
+        {
+            try
+            {
+                return Ok(context.Query<Office>($@"select * from Offices where lower(Address) like lower('%{searchPattern}%')"));
+            }
+            catch (Exception)
+            {
+                return StatusCode(500, "Error");
+            }            
+        }  
             
     }
 }
