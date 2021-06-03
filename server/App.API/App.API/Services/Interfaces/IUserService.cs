@@ -8,6 +8,6 @@ namespace App.API.Services
 {
     public interface IUserService
     {
-        IEnumerable<User> GetUsersByOffices(string officeIds);
+        Task<IEnumerable<User>> GetUsersByOffices(string officeIds);
     }
 }

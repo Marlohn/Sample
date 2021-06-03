@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using App.API.Data;
 using App.API.Models;
 using Microsoft.EntityFrameworkCore;
@@ -32,11 +33,21 @@ namespace App.API.Services
                 .ToArray();
         }
 
-        public IEnumerable<User> GetUsersByOffices(string officeIds)
+        public async Task<IEnumerable<User>> GetUsersByOffices(string officeIds)
         {
             var ids = officeIds.Split(",", StringSplitOptions.RemoveEmptyEntries).Select(o => Guid.Parse(o)).ToArray();
-            var users = GetUsers().Where(o => ids.Contains(o.Office.Id)).ToArray();
-            var roles = GetUserRoles(users.Select(o => o.Id).ToArray());
+
+            var users = await context.Users
+                                    .Include(o => o.Office)
+                                    .Where(o => ids.Contains(o.Office.Id))
+                                    .AsNoTracking()
+                                    .ToArrayAsync();
+
+            //var roles = await GetUserRoles(users.Select(o => o.Id).ToArray());
+            var roles = await context.UserRoles
+                .Include(o => o.Role)
+                .AsNoTracking()
+                .ToArrayAsync();
 
             foreach (var role in roles)
             {

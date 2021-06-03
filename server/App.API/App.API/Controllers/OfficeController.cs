@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using App.API.Data;
 using App.API.Models;
 using App.API.Services;
@@ -22,11 +23,11 @@ namespace App.API.Controllers
         }
 
         [HttpGet]
-        public ActionResult<IEnumerable<Office>> Get(string searchPattern)
+        public async Task<ActionResult<IEnumerable<Office>>> Get(string searchPattern)
         {
             try
             {
-                return Ok(officeService.GetOfficesByAdress(searchPattern));
+                return Ok(await officeService.GetOfficesByAdress(searchPattern));
             }
             catch (Exception)
             {

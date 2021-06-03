@@ -8,6 +8,6 @@ namespace App.API.Services
 {
     public interface IOfficeService
     {
-        IEnumerable<Office> GetOfficesByAdress(string searchPattern);
+        Task<IEnumerable<Office>> GetOfficesByAdress(string searchPattern);
     }
 }

@@ -17,15 +17,19 @@ namespace App.API.Services
             this.context = context;
         }
 
-        private IEnumerable<Office> GetOffices()
+        private async Task<IEnumerable<Office>> GetOffices()
         {
-            return context.Offices
+            return await context.Offices
                 .AsNoTracking() // for perfomance
-                .ToArray();
+                .ToArrayAsync();
         }
-        public IEnumerable<Office> GetOfficesByAdress(string searchPattern)
+
+        public async Task<IEnumerable<Office>> GetOfficesByAdress(string searchPattern)
         {
-            return GetOffices().Where(a => a.Address.ToLower().Contains(searchPattern.ToLower())).ToList();
+            return await context.Offices
+                .Where(a => a.Address.ToLower().Contains(searchPattern.ToLower()))
+                .AsNoTracking()
+                .ToArrayAsync();
         }
     }
 }

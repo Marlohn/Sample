@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using App.API.Models;
 using App.API.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -19,11 +20,11 @@ namespace App.API.Controllers
         }
 
         [HttpGet]
-        public ActionResult<IEnumerable<User>> Get(string officeIds)
+        public async Task<ActionResult<IEnumerable<User>>> Get(string officeIds)
         {
             try
             {
-                return Ok(userService.GetUsersByOffices(officeIds));
+                return Ok(await userService.GetUsersByOffices(officeIds));
             }
             catch
             {
