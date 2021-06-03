@@ -30,7 +30,7 @@ namespace App.API.Controllers
             }
             catch (Exception)
             {
-                return StatusCode(500, "Error");
+                return StatusCode(500, "Error example");
             }            
         }  
             

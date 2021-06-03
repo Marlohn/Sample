@@ -19,22 +19,16 @@ namespace App.API.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<User> Get(string officeIds)
+        public ActionResult<IEnumerable<User>> Get(string officeIds)
         {
-            var ids = officeIds
-                .Split(",", StringSplitOptions.RemoveEmptyEntries)
-                .Select(o => Guid.Parse(o))
-                .ToArray();
-
-            var users = this.userService.GetUsers()
-                .Where(o => ids.Contains(o.Office.Id))
-                .ToArray();
-
-            var roles = this.userService
-                .GetUserRoles(users.Select(o => o.Id).ToArray());
-
             try
             {
+                var ids = officeIds.Split(",", StringSplitOptions.RemoveEmptyEntries).Select(o => Guid.Parse(o)).ToArray();
+
+                var users = this.userService.GetUsers().Where(o => ids.Contains(o.Office.Id)).ToArray();
+
+                var roles = this.userService.GetUserRoles(users.Select(o => o.Id).ToArray());
+
                 foreach (var role in roles)
                 {
                     var user = users.FirstOrDefault(o => o.Id == role.UserId);
@@ -50,13 +44,13 @@ namespace App.API.Controllers
 
                     user.Roles.Add(role);
                 }
+
+                return Ok(users);
             }
             catch
             {
-
-            }
-
-            return users;
+                return StatusCode(500, "Error example");
+            }            
         }
     }
 }
