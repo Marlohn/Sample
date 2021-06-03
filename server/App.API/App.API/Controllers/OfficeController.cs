@@ -14,11 +14,11 @@ namespace App.API.Controllers
     [Route("offices")]
     public class OfficeController : ControllerBase
     {
-        private readonly SampleAppContext context;
+        private readonly IOfficeService officeService;
 
-        public OfficeController(SampleAppContext context)
+        public OfficeController(IOfficeService officeService)
         {
-            this.context = context;
+            this.officeService = officeService;
         }
 
         [HttpGet]
@@ -26,7 +26,7 @@ namespace App.API.Controllers
         {
             try
             {
-                return Ok(context.Offices.Where(a => a.Address.ToLower().Contains(searchPattern.ToLower())).ToList());
+                return Ok(officeService.GetOfficesByAdress(searchPattern));
             }
             catch (Exception)
             {

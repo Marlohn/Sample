@@ -8,11 +8,6 @@ using System.Threading.Tasks;
 
 namespace App.API.Services
 {
-    public interface IOfficeService
-    {
-
-    }
-
     public class OfficeService : IOfficeService
     {
         private readonly SampleAppContext context;
@@ -27,6 +22,10 @@ namespace App.API.Services
             return context.Offices
                 .AsNoTracking() // for perfomance
                 .ToArray();
+        }
+        public IEnumerable<Office> GetOfficesByAdress(string searchPattern)
+        {
+            return GetOffices().Where(a => a.Address.ToLower().Contains(searchPattern.ToLower())).ToList();
         }
     }
 }

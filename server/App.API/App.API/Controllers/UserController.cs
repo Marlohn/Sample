@@ -13,7 +13,7 @@ namespace App.API.Controllers
     {
         private readonly IUserService userService;
 
-        public UserController(UserService userService)
+        public UserController(IUserService userService)
         {
             this.userService = userService;
         }

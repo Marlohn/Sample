@@ -31,6 +31,9 @@ namespace App.API
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "App.API", Version = "v1" });
             });
+
+            services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IOfficeService, OfficeService>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

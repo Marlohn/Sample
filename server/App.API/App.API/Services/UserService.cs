@@ -7,11 +7,6 @@ using Microsoft.EntityFrameworkCore;
 
 namespace App.API.Services
 {
-    public interface IUserService
-    {
-        IEnumerable<User> GetUsersByOffices(string officeIds);
-    }
-
     public class UserService : IUserService
     {
         private readonly SampleAppContext context;
