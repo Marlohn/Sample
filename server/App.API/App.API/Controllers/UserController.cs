@@ -23,29 +23,7 @@ namespace App.API.Controllers
         {
             try
             {
-                var ids = officeIds.Split(",", StringSplitOptions.RemoveEmptyEntries).Select(o => Guid.Parse(o)).ToArray();
-
-                var users = this.userService.GetUsers().Where(o => ids.Contains(o.Office.Id)).ToArray();
-
-                var roles = this.userService.GetUserRoles(users.Select(o => o.Id).ToArray());
-
-                foreach (var role in roles)
-                {
-                    var user = users.FirstOrDefault(o => o.Id == role.UserId);
-                    if (user is null)
-                    {
-                        continue;
-                    }
-
-                    if (user.Roles is null)
-                    {
-                        user.Roles = new List<UserRole>();
-                    }
-
-                    user.Roles.Add(role);
-                }
-
-                return Ok(users);
+                return Ok(userService.GetUsersByOffices(officeIds));
             }
             catch
             {

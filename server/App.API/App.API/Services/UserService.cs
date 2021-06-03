@@ -29,6 +29,31 @@ namespace App.API.Services
                 .ToArray();
         }
 
+        public IEnumerable<User> GetUsersByOffices(string officeIds)
+        {
+            var ids = officeIds.Split(",", StringSplitOptions.RemoveEmptyEntries).Select(o => Guid.Parse(o)).ToArray();
+            var users = GetUsers().Where(o => ids.Contains(o.Office.Id)).ToArray();
+            var roles = GetUserRoles(users.Select(o => o.Id).ToArray());
+
+            foreach (var role in roles)
+            {
+                var user = users.FirstOrDefault(o => o.Id == role.UserId);
+                if (user is null)
+                {
+                    continue;
+                }
+
+                if (user.Roles is null)
+                {
+                    user.Roles = new List<UserRole>();
+                }
+
+                user.Roles.Add(role);
+            }
+
+            return users;
+        }
+
         public UserRole[] GetUserRoles(Guid[] userIds)
         {
             return context.UserRoles
