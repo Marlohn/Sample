@@ -9,7 +9,6 @@ namespace App.API.Services
 {
     public interface IUserService
     {
-        User[] GetUsers();
         IEnumerable<User> GetUsersByOffices(string officeIds);
     }
 
@@ -22,10 +21,18 @@ namespace App.API.Services
             this.context = context;
         }
 
-        public User[] GetUsers()
+        private User[] GetUsers()
         {
             return context.Users
                 .Include(o => o.Office)
+                .AsNoTracking() // for perfomance
+                .ToArray();
+        }
+
+        private UserRole[] GetUserRoles(Guid[] userIds)
+        {
+            return context.UserRoles
+                .Include(o => o.Role)
                 .AsNoTracking() // for perfomance
                 .ToArray();
         }
@@ -53,21 +60,6 @@ namespace App.API.Services
             }
 
             return users;
-        }
-
-        public UserRole[] GetUserRoles(Guid[] userIds)
-        {
-            return context.UserRoles
-                .Include(o => o.Role)
-                .AsNoTracking() // for perfomance
-                .ToArray();
-        }
-
-        public IEnumerable<Office> GetOffices()
-        {
-            return context.Offices
-                .AsNoTracking() // for perfomance
-                .ToArray();
         }
     }
 }
