@@ -17,13 +17,6 @@ namespace App.API.Services
             this.context = context;
         }
 
-        private async Task<IEnumerable<Office>> GetOffices()
-        {
-            return await context.Offices
-                .AsNoTracking() // for perfomance
-                .ToArrayAsync();
-        }
-
         public async Task<IEnumerable<Office>> GetOfficesByAdress(string searchPattern)
         {
             return await context.Offices
