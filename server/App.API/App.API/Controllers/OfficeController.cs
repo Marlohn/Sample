@@ -22,8 +22,7 @@ namespace App.API.Controllers
         }
 
         [HttpGet]
-        [Route("getOffices")]
-        public IEnumerable<Office> GetOffices(string searchPattern)
+        public IEnumerable<Office> Get(string searchPattern)
             // to avoid additional allocations
             => context.Query<Office>($@"select * from Offices where lower(Address) like lower('%{searchPattern}%')");       
             

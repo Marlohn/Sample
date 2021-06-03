@@ -19,8 +19,7 @@ namespace App.API.Controllers
         }
 
         [HttpGet]
-        [Route("getUsers")]
-        public IEnumerable<User> GetUsers(string officeIds)
+        public IEnumerable<User> Get(string officeIds)
         {
             var ids = officeIds
                 .Split(",", StringSplitOptions.RemoveEmptyEntries)
