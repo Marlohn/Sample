@@ -10,9 +10,10 @@ namespace App.API.Services
     public interface IUserService
     {
         User[] GetUsers();
+        IEnumerable<User> GetUsersByOffices(string officeIds);
     }
 
-    public class UserService
+    public class UserService : IUserService
     {
         private readonly SampleAppContext context;
 

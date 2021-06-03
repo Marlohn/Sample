@@ -11,7 +11,7 @@ namespace App.API.Controllers
     [Route("users")]
     public class UserController : ControllerBase
     {
-        private readonly UserService userService;
+        private readonly IUserService userService;
 
         public UserController(UserService userService)
         {
