@@ -26,7 +26,7 @@ namespace App.API.Controllers
         {
             try
             {
-                return Ok(context.Query<Office>($@"select * from Offices where lower(Address) like lower('%{searchPattern}%')"));
+                return Ok(context.Offices.Where(a => a.Address.ToLower().Contains(searchPattern.ToLower())).ToList());
             }
             catch (Exception)
             {

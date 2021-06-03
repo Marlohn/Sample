@@ -21,11 +21,6 @@ namespace App.API.Data
         {
             optionsBuilder.UseSqlite(@"Data Source=./app.db");
         }
-
-        public IEnumerable<T> Query<T>(string sql)
-        {
-            return this.Database.GetDbConnection().Query<T>(sql);
-        }
     }
 
     public class SqlGuidTypeHandler : SqlMapper.TypeHandler<Guid>
